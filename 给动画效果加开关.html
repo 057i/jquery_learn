@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="startBtn">start</button>
+    <button id="stopBtn">stopBtn</button>
+    <button id="finishBtn">finish</button>
+    <div class="box" style="background:chocolate;width: 100px;height:100px;position:absolute;"></div>
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        $('#startBtn').on('click',function(){
+            $('.box')
+                .animate({width:'+=50px',height:'+=50',left:'+=50',top:'+=50'},1500,'swing')
+                    .delay(3000)
+                        .animate({width:'+=50',height:'+=50',left:'+=100',top:'-=100'},1500,'swing')
+        })
+
+
+        //stop()方法，用来停止jq中的动画，stop()括号中中可以传参数（null,true,两个true）;
+        $('#stopBtn').on('click',function(){
+            // $('.box').stop();停止当前的动画，如果有多个动画会出问题
+            // $('.box').stop(null);传null等于不传值
+            // $('.box').stop(true);
+            $('.box').stop(true,true);//结束本轮动画，按照以本轮动画停止时的点为起始点瞬移至以这个起始点为起点移动到的最终位置
+        })
+
+        //finish()方法用来停止所有动画，括号里不能加参数
+        $('#finishBtn').on('click',function(){
+            $('.box').finish();//直接结束动画，dom移动到最终位置
+        })
+
+
+        //delay(毫秒数),用来延迟动画与动画之间的间隔时间
+    </script>
+
+
+</body>
+</html>

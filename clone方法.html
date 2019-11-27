@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper" style="background: hotpink;width: 100px;height: 100px" ></div>
+    <p>11111111</p>
+</body>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+      //单纯的clone()方法,只能复制jq中的dom元素，不能将dom元素中所包含的事件一并复制过来，但是如果将它改成clone(true)就是不一样的了
+    //   $('.wrapper')
+    //         .click(function(){$(this).css({background:'green'})})
+    //             .clone()
+    //                 .appendTo('body');
+
+    //类似深度克隆，会将这个元素的所有属性都复制一遍过来
+      $('.wrapper')
+        .click(function(){$(this).css({background:'blue'})})
+            .clone(true)
+                .appendTo('body');
+    
+
+    $('<p><h3>$()选择器方法还可以用作创建文档碎片然后插入到页面中去</h3></p>').prependTo('body');
+    document.getElementsByClassName('wrapper')[0].appendChild(document.getElementsByTagName('p')[0])
+</script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper"></div>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        // ajax也是工具方法，辅助前端向后端发送数据请求以及返回数据的工具，(浏览器输入地址按下回车后数据的请求就开始了)jq集成了$.ajax()方法，在原生js中也有ajax方法
+        //ajax常用的参数有
+        // url:'https://easy-mock.com/mock/5c0b4a876162b83fe0a50cb9/person'必须要有，不然没有地方请求数据
+        //type:可以填GET或者POST还有其他很多，这两个常用
+        // date:{}  里面存参数以及信息
+        //success:成功后要执行的操作
+        // error:错误时候要执行的操作
+        //complete:请求完成后执行的操作
+        //context改变上下文this指向
+        // dataType:'jsonp'    期待服务器按照某种格式执行请求
+          //aysnc:true或者false  默认异步  是否异步  ajax的提出就是基于异步的javascript和请求html
+                                // 计算机中的异步就是生活中多件事的同步
+
+
+
+
+        $.ajax({
+            url:'https://easy-mock.com/mock/5c0b4a876162b83fe0a50cb9/person',
+            type:'GET',
+            success:function(e){
+                $.each(e.data,function(index,ele){   //利用jq中的工具方法循环遍历数组
+                    console.log(ele)
+                })
+                console.log(this);//因为在下面context将上下文执行的this指向了$('.wrapper'),所以在这个ajax中this的指向统统都变成这个
+            },
+            error:function(e){
+                console.log(e.status,e.statusText)
+            },
+            complete:function(e){
+                console.log(e.status,e.statusText)
+            },
+            context:$('.wrapper'),
+            async:true
+        })
+        console.log(56564);//异步的javascript和请求html
+
+        function deal(e){
+            console.log(e)
+        }
+
+        //请求百度搜索的例子
+        $.ajax({
+            url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+            type:'GET',
+            data: {
+                wd: 'nba',
+                cb:'deal'//这里要定义一个全局的函数来处理返回的数据，叫什么名字都行
+            },
+            dataType:'jsonp',//jsonp跨域
+            success:function(e){
+                console.log(e)
+            },
+            error:function(e){
+                console.log(e.statusText)
+            },
+            complete:function(e){
+                console.log('完成请求')
+            }
+
+        })
+
+
+
+
+
+
+
+
+
+    
+    </script>
+</body>
+</html>

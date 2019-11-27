@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">0000
+
+
+        <div class="box">
+            <div class="small_box"></div>
+        </div>
+    </div>
+    <div class="box1" style="background:red;width:100px;height:100px; position: absolute;left:0;top:0;"></div>
+
+
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        // typeof()返回的是什么数据类型，$.type()返回是里面的数据到底是什么
+       //typeof()  undefined,Boolean,Numner,String,Object,Function
+
+       console.log($.type(undefined));//undefined
+       console.log($.type(111));//number
+       console.log($.type('dsadas'));//string
+       console.log($.type(false));//boolean
+       console.log($.type(function(){}))//function
+       console.log($.type({})) //object
+       //区别于typeof
+       console.log($.type(null));//返回的是null，区别如果是typeof(null)，会返回object
+       console.log($.type([1,2,3,4]))//返回array
+       console.log($.type(new Date()));//返回date,如果typeof(new Date()),返回的是object
+       console.log($.type(new Person()))//返回的是object，如果传进去的是函数的话就是返回function,如果传进去的是函数实例化的对象的话返回的是object
+       function Person(){}
+        console.log($.type((function(){})()));//传进去立即自行函数返回Undefined
+
+
+        //然后又由$.type()方法衍生出子方法，$.isFunction(),$.isArray(),$.isWindow(),代码量少，省效率
+        console.log($.isArray([1,2,3,4]))//返回true
+
+
+
+
+        //工具方法2,$.trim()用来去掉字符串中头尾的，和原生Js的字符串中的str.trim()一样,只能去掉头尾空格
+        var str='   15 f45 efsdf f sd f sd fsd f sd wer we    ';
+        // console.log(str.trim());//15 f45 efsdf  f sd f sd fsd f sd wer we
+        console.log($.trim(str))
+
+
+
+
+        //工具方法之$.proxy(func,this),类似于bind方法，但是要定义一个新的变量来接收使用
+        function show(){
+            console.log(this.name)
+        }
+        var obj={
+             name:'fgsdf',
+             sex:'male',
+             show:function(){console.log(111)}
+        }
+        var showProxy=$.proxy(show,obj);//改变show的this指向到obj
+
+        //单对象编程，防止开发者之间数据的污染，最后传一个值出来就好
+        var obj1={
+            init:function(){
+                this.dom=document.getElementsByClassName('box1')[0];
+                this.ms=123;
+                console.log(this.dom)
+                this.bindEvent();
+
+            },
+            bindEvent:function(){
+                // this.dom.onclick=this.show  不能这么写，因为到下一步的this就会指向this.dom，this.dom中没有message方法，会报错，这里要往回一级去修改
+                this.dom.onclick=$.proxy(this.show,this)
+                console.log(1111)
+            },
+            show:function(){
+                console.log(this);//因为用了proxy方法后this指向
+                console.log(this.message(this.ms))
+            },
+            message:function(ms){
+                return ms+123
+            }     
+        }
+        obj1.init()
+
+        //$.noConflict()//,防止用户命名冲突，却可以使用jquery方法,简单点的意思就是用自己定义的名字的变量可以被jq再封装一遍从而可以使用jq方法,使用之后原本的$()方法就不存在了
+        // $c=$.noConflict();
+        // console.log($c('.box1'))
+
+
+
+
+
+        // $.each(arr,function(index,ele){})是工具方法，原生js的foreach就是仿造它的，区别于$().each(function(index,ele){})实例方法
+        var arr=[1,2,3,4];
+        $.each(arr,function(index,ele){//括号里写要循环的数组，类数组，对象，和处理函数
+            console.log(ele*index)})
+
+        
+        //$.map(arr,function(index,ele){});这里不会改变原数组，要定义一个对象用来接收映射关系，js中的map方法来源于他
+        var arr1=$.map(arr,function(index,ele){
+            return ele*index
+        })
+
+
+
+        // $.parseJSON()   就是用js中的JSON.parse(date+'')封装的
+        var a='{"0":"aaa","2":true}';//必须是严格意义上的json对象才能使用的！
+        console.log($.parseJSON(a));//返回{0: "aaa", 2: true}
+        b=$.parseJSON(a)
+        console.log(JSON.stringify(b
+        ));//返回"{\"0\":\"aaa\",\"2\":true}"
+        // 原生的js中有JSON.stringify()方法，将json对象转变成字符串，这个方法JQ中没有
+
+
+        // $.makeArray()工具方法，将数组或者类数组转换成数组的形式,括号里可以放一个参数，也可以放两个参数
+        var b={
+            0:'das',
+            1:'das',
+            2:'ddsadw',
+            3:'dwgwer',
+            length:4
+            }
+        var bb=[1,2,3];
+        // 一个参数的情况
+        var c=$.makeArray(b);//c就变成了["das", "das", "ddsadw", "dwgwer"]，我们自己也可以利用原生封装转变成数组的方法
+        //两个参数的情况，api里面没有的
+        $.makeArray(b,bb);//将b对象转成数组后加入到后面的数组里改变原数组，结果为[1, 2, 3, "das", "das", "ddsadw", "dwgwer"]
+        $.makeArray(2,bb);//改变原数组加到最后
+        
+        function makeArray(obj){
+            var arr=[].slice.call(obj,0)
+            return arr
+        }
+
+        
+
+
+
+        //重点！！！
+        //$.extend()是工具方法，用来添加自定义工具方法，$.fn.extent()是实例方法，添加自己的方法到jq中然后可以用$.方法名或者$().方法名的方式来使用
+       //$.extend()的用法有三个：1.拓展方法（api中没有重点） 2.浅层克隆 3.深层克隆（相比浅层克隆多了克隆索引值，数组对象函数）
+        
+        //添加自定义工具方法，以$.方法名()使用
+        $.extend({
+            randomNumber:function (start,final) {
+                var len=final-start;     //添加自定义工具方法，定义方式和单对象编程一样
+                return start+len*Math.random()
+            }
+        })
+        console.log($.randomNumber(
+
+        ));
+
+
+        //添加自定义实例方法
+            $.fn.extend({
+                drag: function () {
+                    var disX, disY, self = this;//这里的this为了后面更好的引用
+                    $(this).on('mousedown', function (e) {
+                        disX = e.pageX - $(this).offset().left;
+                        disY = e.pageY - $(this).offset().top;
+                        $(document).on('mousemove', function (e) {
+                            $(self).css({ left: (e.pageX - disX), top: e.pageY - disY })
+                            console.log(e.pageX - disX)
+                        })
+                        $(document).on('mouseup', function () {
+                            $(document).off('mousemove').off('mouseup');//链式解绑
+                        })
+                    })
+                    return this
+                }
+        })
+
+        //$.extend(obj,obj1,obj2......)工具方法实现浅度克隆，和直接用（var peop in obj）,然后直接放入对象一样
+        //$.extend(true,obj,obj1,obj2.....)工具方法实现深度克隆,和js中的深度克隆一样，这个更强大，可以传多个参数,从右往左复制 (覆盖公有的，补充没有的)
+
+
+
+        var object={
+            lastName:'deng',
+            age:18,
+            sex:'male'
+        }
+        var object1={
+            lastName:'laodeng',
+            age:21,
+            sex:'female',
+            son:{name:'laolaodeng'},
+            money:[1,2,3,4]
+        }
+        var object2={
+            last:'liu',
+            age:22,
+            money:15000
+        }
+        $.extend(object,object1,object2);//不能拷贝索引值
+        console.log(object)
+        // object1.son={name:'hjaksdk'};//更改被拷贝的索引型数据，拷贝出来的也会改变，因为只拷贝了一个索引
+        console.log(object1);//这里的son变成了{name:'hjaksdk'}
+        
+
+        //解决的思路就是用工具方法上的深度克隆
+        var object3;
+        console.log($.extend(true,object3,object,object1,object2));
+    </script>
+</body>
+</html>

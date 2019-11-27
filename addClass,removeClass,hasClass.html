@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .style1{
+            background: grey;
+        }
+        .style2{
+            background: palevioletred;
+        }
+        /* 并列选择器，要空格隔开 */
+        .active .style1{
+            background: rebeccapurple;
+        }
+        .active .style2{
+            background: greenyellow
+        }
+    
+    
+    </style>
+    
+</head>
+
+<body>
+    <div class="demo">5</div>
+    <div class="demo">6</div>
+    <div class="demo">7</div>
+
+
+    <div class="wrapper">
+        <ul class="style1">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <ul class="style2">
+            <li>10</li>
+            <li>9</li>
+            <li>8</li>
+            <li>7</li>
+            <li>6</li>
+        </ul>
+    </div>
+
+
+
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+        //选取demo类名下的第一个赋予类名active，这里要区别一下，addClass是相当于已有的类名+=新的类名
+        $('.demo').eq(0).addClass('active');
+
+        //一下子加两个类名,要用空格隔开
+        $('.demo').eq(0).addClass('demo2 demo3');
+
+        //addClass方法进行循环判断，传入一个函数，来进行更为复杂的操作
+        $('.demo').addClass(function (index, ele) {
+            if (index % 2 == 0) {
+                return 'active1'
+            }
+        })
+
+
+        //接下来是removeClass()方法用来移除类名
+        //同时移除两个类名要用空格隔开
+        $('.demo').eq(0).removeClass('demo2 demo3')
+        console.log($('.demo').eq(0).attr('class'));//返回demo active active1
+        console.log($('.demo').eq(0).prop('class'));//也是返回demo active active1
+
+
+
+        //判断一个dom是否有某个类名用hasClass
+        console.log($('.wrapper').hasClass('active'))
+
+        //绑定一个点击事件，让他按照点击次数去修改类名，从而来达到修改样式以及操作的目的
+        //写法1
+        $('.wrapper').click(function(){
+            console.log(this)//返回<div class="wrapper"></div>,这里取出来的是原生dom，所以不能用this.hasClass
+            if($('.wrapper').hasClass('active')){
+                $('.wrapper').removeClass('active')
+            }else{
+                $('.wrapper').addClass('active');
+            }
+
+        })
+
+        //写法2
+        //或者写成
+        // $('.wrapper').click(function(){
+        //     console.log(this)//返回<div class="wrapper"></div>,这里取出来的是原生dom，所以不能用this.hasClass
+        //     if($(this).hasClass('active')){
+        //         $(this).removeClass('active')
+        //     }else{
+        //         $(this).addClass('active');
+        //     }
+
+        // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

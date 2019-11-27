@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <script src="./jquery.js"></script>
+    <script type='text/javascript'>
+    //$.Callbacks(options),用来集体调用函数,可以放once,stopOnFalse,memony,unique,onceMemony或者不传
+    // 回调参数有once(不管执行多少次fire，不管传多少次参数进fire里面去执行，只执行一次),
+    // stopOnFalse(在执行fire()时候，如果回调函数中存在return false就停止剩下的fire回调),
+    // memory（保存旧的fire()括号里面的参数在新回调函数后还能使用，执行fire()),
+    // unique(确保每次传参执行的唯一性)
+
+    //异步编程离不开回调函数
+
+
+
+
+    function a(x,y){
+        console.log('a',x,y);
+        return false
+    }
+    function b(x,y){
+        console.log('b',x,y);       
+    }
+    function c(h,m){
+        console.log('c',h,m)
+    }
+
+    //once的情况:保证回调传参的唯一性
+    // var cb=$.Callbacks('once');
+    // cb.add(a,b);
+    // cb.fire(10,20);
+    // cb.fire(10,20);
+    // 返回：a 10 20   调用两次回调只会执行一次回调
+    //      b 10 20
+
+
+
+
+    // //memory的情况，带记忆功能的回调：先回调执行后，会保留执行时传入的参数，等到后面再添加回调函数时候，将之前参数传入执行
+    // var cb=$.Callbacks('memory');
+    // cb.add(a,b);
+    // cb.fire(5,10);
+    // cb.fire(10,15)
+    // cb.add(c);
+    //返回a 5 10
+       // b 5 10
+      //  c 5 10
+
+
+
+
+    //unique的情况
+    var cb=$.Callbacks('unique');
+    cb.add(a,b);
+    cb.fire(10,20);
+    // 返回：a 10 20   去除重复的调用
+    //      b 10 20
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>

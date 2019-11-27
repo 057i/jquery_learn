@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+   <style>
+    .wrapper{
+        padding: 10px;
+        width: 230px;
+        border:1px solid black;
+    }
+    .wrapper div{
+        width: 200px;
+        height:100px;
+    }
+    .box1{
+        background:indianred;
+    }
+    .box2{
+        background: purple;
+    }
+    .content{
+        background: blue;
+        width: 200px;
+        height: 50px;
+    }
+
+
+
+   
+   </style>
+<body>
+    <div class="wrapper">
+        <div class="box1">box1</div>
+        <div class="box2">box2</div>
+    </div>
+    <div class="content">content</div>
+
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        //为了链式调用，链式调用看主语，看看谁是主语，就是谁链式调用的,
+        //insertBefore和before是一对，
+        //insertAfter和after是一对；
+        //appendTo和append是一对，
+        //prependTo和prepend是一对
+       
+
+       
+        //insertBefore()和before
+        // $('.content').insertBefore($('.box1'));
+        // $('.content').insertBefore($('.box1')).css({background:'orange'});//这里的链式调用的主语是$('.content')；
+        // //或者也可以写成
+        // $('.box1').before($('.content'));//在box1之前插入content
+        // $('.box1').before($('.content')).css({background:'orange'});//在box1之前插入content，然后将颜色改成橙色
+
+
+
+        //insertAfter()和after()
+        // $('.content').insertAfter($('.box1'));
+        // $('.content').insertAfter($('.box1')).css({backgroundColor:'green'});
+        //或者也可以写成
+        // $('.box1').after($('.content')).css({backgroundColor:'red'});
+
+
+
+        //appendTo和append,在父级元素中插入到最后，两种写法
+        // $('.content').appendTo($('.wrapper')).css({color:'yellow'});//将原本属于wrapper外的content剪切后插入到wrapper里面去，主语是content
+        // $('.wrapper').append($('.content'));//主语是wrapper
+
+
+
+        //prependTo和prepend,在父级元素中插入，插入到第一个子元素
+        // $('.content').prependTo($('.wrapper'));//插入到wrapper
+        // $('.wrapper').prepend($('.content'));
+
+
+
+
+        // jq中的remove方法和detach方法，都是执行剪切操作,剪切自身,但是在事件方面有所差异
+        //remove方法剪切后黏贴，如果原本的dom对象中包含事件，那么粘贴后只会粘贴dom元素，但是事件不会被粘贴还原
+        // 例
+        $('.content').click(function(){
+            alert('a');
+        })
+        //对比
+        // $('.content').remove().appendTo($('.wrapper'));//使用remove方法后剪切自身，会使自身的事件消失
+        $('.content').detach().appendTo($('.wrapper'));//使用detach方法剪切自身粘贴后，自身事件会保留
+
+
+
+        // 另外，$()选择器不只是可以用做选取元素，还可以用作创建自定义html然后插入到页面中去
+        // 例,$()方法很强大！！！
+        $('<div><span class="content1">eeeeeeeee</span></div>').appendTo($('.content'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    </script>
+
+    
+</body>
+</html>

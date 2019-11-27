@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        function a(){
+            console.log('a')
+        }
+        function b(){
+            console.log('b')
+        }
+        function c(){
+            console.log('c')
+        }
+
+        //类似es6中的Promise对象.when(),等到when中的队列函数执行完之后要做的事
+        $.when(a,b,c).done(function(){
+            console.log(123)
+        })
+    
+    
+    </script>
+</body>
+</html>

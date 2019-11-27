@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>水果</h1>
+        全选：<input type="checkbox">
+        banana: <input type="checkbox">
+        apple: <input type="checkbox">
+        orange: <input type="checkbox">
+    
+        <h1>nba</h1>
+        全选：<input type="checkbox">
+        Rose: <input type="checkbox">
+        Curry: <input type="checkbox">
+        James: <input type="checkbox">
+    
+    </div>
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+
+    //nextUntil括号里可以写过滤条件，添加一个参数的情况
+        // $('input[type="checkbox"]').eq(4).click(function(){
+        //     if($(this).prop('checked')){
+        //         $(this).nextUntil('h1').prop('checked',true)
+        //     }else{
+        //         $(this).nextUntil('h1').prop('checked',false)
+        //     }
+        // })    
+    
+    //nextUntil添加两个参数的情况！！括号里的第一个位置一定是在什么之前
+    //在h1标签下先选取出
+    $('h1').next().click(function(){
+        console.log($('h1').next())
+        if($(this).prop('checked')){  //这里的this指向$('h1').next()
+            $(this).nextUntil('h1','input[type="checkbox"]').prop('checked',true)
+        }else{
+            $(this).nextUntil('h1','input[type="checkbox"]').prop('checked',false)
+        }
+    })
+
+
+
+
+    </script>
+
+</body>
+</html>

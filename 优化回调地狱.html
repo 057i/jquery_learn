@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .introduce {
+            width: 400px;
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+
+        .wrapper {
+            width: 600px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -300px;
+            margin-top: -200px;
+        }
+
+        .movieSection {
+            display: inline-block;
+            width: 200px;
+
+        }
+
+        .movieSection img {
+            width: 180px;
+            height: 200px;
+            padding: 10px;
+            background-size: 100% 100%;
+
+        }
+
+        h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="introduce"></div>
+    <div class="wrapper">
+        <div class="tpl">
+            <img src="" alt="">
+            <h3></h3>
+        </div>
+    </div>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+
+
+    //因为多次回调，造成了回调地狱的写法
+        // $.ajax({
+        //     url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/power',
+        //     type: 'POST',
+        //     data: {
+        //         username: 'cst',
+        //         password: '123123'
+        //     },
+        //     success: function (res) {
+        //         if (res.data['power'] == 'root') {
+        //             $.ajax({
+        //                 url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/movieList',
+        //                 type: 'GET',
+        //                 data: {
+        //                     username: 'cst',
+        //                     password: '123123'
+        //                 },
+        //                 success: function (res) {
+        //                     $(res.data).each(function (index, ele) {
+        //                         var $variable = $('.tpl').clone().removeClass().addClass('movieSection').appendTo('.wrapper');
+        //                         $variable.data({ id: ele.id }).on('click', function () {
+        //                             $.ajax({
+        //                                 url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/movieInfo',
+        //                                 type: 'GET',
+        //                                 data: {
+        //                                     movieId: $(this).data('id')
+        //                                 },
+        //                                 success: function (res) {
+        //                                     console.log(res.data);
+        //                                     var data = res.data;
+        //                                     var dir = data.direct;
+        //                                     var gui = data.gut;
+        //                                     var actor = data.mainActor;
+        //                                     var name = data.name;
+        //                                     var writer = data.screenwriter;
+        //                                     var htmlStr = '<p>' + dir + '</p>\
+        //                                             <p>'+ gui + '</p>\
+        //                                             <p>'+ actor + '</p>\
+        //                                             <p>'+ name + '</p>\
+        //                                             <p>'+ writer + '</p>';
+        //                                     $(htmlStr).appendTo($('.introduce'));
+        //                                 }
+        //                             })
+        //                         })
+        //                             .children().eq(0).attr('src', ele.poster)
+        //                             .next().text(ele.name)
+        //                     })
+        //                 }
+        //             })
+        //         }
+        //     }
+        // })
+
+
+        //优化后的回调使用工具方法$.Deferred()以及then方法(只写成功的),单一职责，开闭原则
+
+        //立即执行函数写后台用户名连接的ajax
+        // (function(){
+        //     return $.ajax({
+        //     url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/power',
+        //     type: 'POST',
+        //     data: {
+        //         username: 'cst',
+        //         password: '123123'
+        //     }
+        // })})()
+        // //然后判断是否有权限
+        //     .then(function (res) {
+        //                 if (res.data.power == 'root') {
+        //                     return $.ajax({
+        //                         url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/movieList',
+        //                         type: 'GET'
+        //                     })
+        //                 }
+        //             })
+        //         //获取到连接所能获取的内容填充到页面
+        //         .then(function(res){
+        //             var data=res.data;
+        //             var df=$.Deferred();//单独做一个延迟对象，因为事件本身也是延迟对象
+        //             $(res.data).each(function (index, ele) {
+        //                 var $variable = $('.tpl').clone().removeClass().addClass('movieSection').appendTo('.wrapper');
+        //                 $variable.data({id:ele.id}).on('click',function(){
+        //                     df.resolve($(this));//如果相对应的变量被点击了执行显示相对应的介绍
+        //                 }).children().eq(0).attr('src', ele.poster)
+        //                            .next().text(ele.name)
+        //             })
+        //                 return df.promise();//返回一个promise对象为后面的链式调用做准备
+        //         })
+        //          //在之前的基础上获取电影信息
+                    //     .then(function (dom) {
+                    //         return $.ajax({
+                    //             url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/movieInfo',
+                    //             type: 'GET',
+                    //             data: {
+                    //                 movieId: $(this).data('id')
+                    //             }
+                    //         })
+                    //     })
+                                //     .then(function (res) {
+                                //         var data = res.data;
+                                //         var dir = data.direct;
+                                //         var gui = data.gut;
+                                //         var actor = data.mainActor;
+                                //         var name = data.name;
+                                //         var writer = data.screenwriter;
+                                //         var htmlStr = '<p>' + dir + '</p>\
+                                //                        <p>'+ gui + '</p>\
+                                //                        <p>'+ actor + '</p>\
+                                //                        <p>'+ name + '</p>\
+                                //                        <p>'+ writer + '</p>';
+                                //         $(htmlStr).appendTo($('.introduce'));
+                                //     })
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

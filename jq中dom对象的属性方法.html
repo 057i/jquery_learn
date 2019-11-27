@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body,html{
+            width: 3000px;
+            height: 1000px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="box" style="width:100px;height:100px;background:rebeccapurple;"></div>
+    <div class="wrapper" style="position:relative;width:300px;height:300px;background:rosybrown;margin-left: 10px;">
+        <div class="box1" style="position:absolute;left:100px;width: 100px;height: 50px;background:seagreen;padding-top:20px;margin: 5px">111</div>
+    </div>
+</body>
+<script src="./jquery.js"></script>
+<script type="text/javascript">
+    console.log($('.box').offset())//返回的是当前对象距离文档的距离的left和top封装的一个jq对象
+    $('.box').offset({top:10})//用offset也可以用来赋值，但是只能赋top和left的值
+    console.log($('.box').position());//返回的是当前对象距离有定文的父级的距离（left和top）所封装的对象，如果没有父级，就用文档
+    console.log($('.box1').position())
+
+
+    // scrollTop和scrollLeft可以用来赋值也可以用来取值，例
+    $(document).scrollLeft(100);//滚动条往右移动100
+    console.log($(document).scrollLeft())
+    $(document).scrollTop(50);
+    console.log($(document).scrollTop())
+
+
+
+    // width()和height(),取元素content区高度
+    console.log($('.box').width());//返回100
+    console.log($('.box').height());
+
+
+    //innerWidth()------>content+padding
+    console.log($('.wrapper').innerWidth());
+    console.log($('.wrapper').outerWidth());      //content+padding+border
+    console.log($('.wrapper').outerWidth(true));   //content+padding+border+margin
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

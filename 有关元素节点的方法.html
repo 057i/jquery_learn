@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul style="border-bottom:1px solid blue">
+        <span>span-1</span>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <span>span-2</span>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <span>span-3</span>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+   
+    <ul>
+        <span>aaaaaa</span>
+    </ul>
+
+    <div class="wrapper"  style="background:indianred">
+    <div class="shop" data-id='101' style="position:relative">
+        <div>
+            <p style="position:absolute">basketball-nike</p>
+            <button></button>
+        </div>
+    </div>
+
+    <div class="shop" data-id='102'>
+        <div>
+            <p>basketball-adidas</p>
+            <button></button>
+        </div>
+    </div>
+    </div>
+
+
+
+
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+        //jq中siblings返回的是该元素的所有同级兄弟元素，而js中有分到底是兄弟节点（prevSibling,nextSibling）还是兄弟元素节点（prevElementSibling,nextElementSibling）
+
+        //例：返回第五个节点的兄弟元素节点中是span标签的元素,siblings()的括号里还可以添加条件做筛选
+        console.log($('li').eq(4).siblings());//返回全部同级兄弟元素
+        console.log($('li').eq(4).siblings('span'));//返回三个span
+
+
+
+        //parent返回的是该元素的上一层父级元素,纯父级
+        console.log($('span').eq(0).parent());//返回的是ul；//针对的是第一个span元素的父级
+        console.log($('span').parent());//返回两个ul，这个针对的就是所有span元素的父级，如果两两ul不处于同一个父级下
+                                                //则会返回多个span的父级，然后筛掉重复的父级
+
+
+
+
+
+     //如果是parents，返回的是该元素的所有父级，如果是元素之类的方法，括号里都可以添加条件做筛选
+        console.log($('button').eq(0).parents());//返回
+                                                // 0: div
+                                                // 1: div.shop
+                                                // 2: div.wrapper
+                                                // 3: body
+                                                // 4: html该元素所有父级，不做筛选
+
+        //接下来是做筛选的情况
+        $('button').eq(0).parents('div[class="shop"]').css({backgroundColor:'pink'})//返回div.shop，选出该元素所有的上层父级，然后按筛选条件做筛选
+
+
+        //parents方法和closest方法的区别，parents方法是从父级往上去找，找零个一个或多个的jq对象
+        //而closest方法是从自身出发，去找零个或一个的jq对象，找到一个就停止
+        console.log($('button').eq(0).closest('p'));//从自身出发，往上找有没有父级是p标签的，没有找到
+        console.log($('button').eq(0).closest('button'));//从自身出发，往上找有没有父级是button的，找到了，停止寻找，返回一个jq对象
+
+
+        //offsetParent:和js中的一样，返回当前元素中有定位的父级，
+        console.log($('p').eq(0).offsetParent());//返回一个带有shop标签的div，因为这个div是他的父级且有定位的！
+
+
+    </script>
+</body>
+
+</html>

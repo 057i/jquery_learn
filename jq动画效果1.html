@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .demo{
+            width: 200px;
+            border: 1px solid blue;
+            margin-bottom:100px; 
+        }
+        ul{
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <p>Menu</p>
+        <ul>
+            <li>000000001</li>
+            <li>000000002</li>
+            <li>000000003</li>
+            <li>000000004</li>
+        </ul>
+    </div>
+
+    <p class="title">Title</p>
+    <ul class="box">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    
+
+
+    <div class="box1" style="background:blue;width:100px;height:100px;position: absolute">这是animate方法</div>
+
+    <div class="box2" style="background:yellow;width:100px;height:100px;position: absolute;margin-top:200px">这是animate+点击事件方法</div>
+    <div class="box3" style="background:green;width:100px;height:100px;position: absolute;margin-top:400px"></div>
+
+    <div class="box4" style="background:black;width:100px;height:100px;position: absolute;margin-top:500px"></div>
+
+    <div class="box5" style="background:pink;width:100px;height:100px;position: absolute;margin-top:700px"></div>
+
+
+
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        $('p').on('mouseenter',function(){
+            $(this).next().show(1500);//原本是display:none;修改之后鼠标移入展示变成还原默认的display,ul是display:block;如果设置了默认就按设置的来
+        })
+        $('.demo').on('mouseleave',function(){
+            $('ul').hide(1500);
+        })
+
+
+        //这些个动画效果还可以在括号里第一个参数写时间，然后所有css属性按照时间过度展示，比如width,height,opacity,margin,padding
+        //还可以在这些动画方法里里写第二个参数，比如swing,linear
+
+
+
+
+        //toggle方法，按照奇偶次数执行函数，类似if...else...     ????toggle如何判断当前状态以及要执行的状态,以display：none和block用来判断
+        $('.title')
+            .css({backgroundColor:'orange'})
+                .on('click',function(){
+                    // if($(this).next().css('display')=='none'){
+                    //     $(this).next().show(1500);
+                    // }else{
+                    //     $(this).next().hide(1500);
+                    // }
+
+                    $(this).next().toggle();
+                    //或者是 $(this).next().fadeToggle();//淡入淡出
+                })
+
+
+
+
+        //animate是jq的运动方法，括号里可以传target,duration,easing,callback,四种参数，分别为目标点，过度时间，，回调函数
+        //duration可以传毫秒数，也可以传关键字，slow,normal,fast分别对应200,400,600毫秒
+             $('.box1')
+                .animate({width:'+=50',height:'+=50',left:'+=50',top:'+=50'},2000,'swing')
+                    .animate({width:'+=50',height:'+=50',left:'+=50',top:'+=50'},2000,'linear')
+
+
+
+        //然后可以结合点击事件一起写
+            $('.box2').on('click',function(){
+                $(this)
+                    .animate({width:'+=100',height:'+=100',top:'+=50',left:'+=100'},1500,'linear')
+                        .animate({width:'+=100',height:'+=100',top:'+=50',left:'+=100'},1500,'linear')
+
+            })
+
+        
+        // hide(),show(),toggle()方法为一组，改变dom元素全部属性，从无到有
+        // $('.box3').hide(1500,'linear');//从已有的属性值全面减小到0
+        // $('.box3').show(3000,'swing');//全部属性值从0还原至赋值的属性
+        $('.box3').on('click',function(){$('.box1').toggle()}) //动态效果为从右至左。横向动作，toggle通过display来判断切换所有匹配元素的可见性
+
+
+        
+
+
+        // slideDown,slideUp,slideToggle:卷帘门效果，动态效果从下至上。竖向动作，slideToggle 通过高度变化来切换所有匹配元素的可见性（height和margin-top）
+        // $('.box4').on('click',function(){$('.box1').slideToggle()});
+        $('.box4').slideUp(3000,function(){console.log('slideUp')});//往上运动
+        $('.box4').slideDown(3000,function(){console.log('slideDown')});//高度从0运动到自身设定高度，往下运动
+
+
+            //注意一下，这里的要淡入淡出到某个值设置的时候只有fadeTo才能用，其他不能用目标值
+        // $('.box5').fadeOut(1500,'swing',function(){console.log('fadeOut')})
+        // $('.box5').fadeIn(1500,'linear',function(){console.log('fadeIn')})
+        // $('.box5').fadeTo(1500,0.2,'linear',function(){console.log('fadeTo')});//单向改变目标值
+        
+        //点击淡入淡出效果
+        $('.title').on('click',function(){
+            $('.box5').fadeToggle(1500,'linear',function(){console.log(11111)})
+        })
+        
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </script>
+
+
+
+
+
+    
+</body>
+</html>

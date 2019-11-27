@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .introduce{
+            width: 400px;
+            border:1px solid black;
+            margin:0 auto;
+        }
+        .wrapper {
+            width: 600px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -300px;
+            margin-top: -200px;
+        }
+
+        .movieSection {
+            display: inline-block;
+            width: 200px;
+
+        }
+        .movieSection img {
+            width: 180px;
+            height: 200px;
+            padding: 10px;
+            background-size: 100% 100%;
+ 
+        }
+        h3{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="introduce"></div>
+    <div class="wrapper">
+        <div class="tpl">
+            <img src="" alt="">
+            <h3></h3>
+        </div>
+    </div>
+
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/power',
+            type: 'POST',
+            data: {
+                username: 'cst',
+                password: '123123'
+            },
+            success: function (res) {
+                if (res.data['power'] == 'root') {
+                    $.ajax({
+                        url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/movieList',
+                        type: 'GET',
+                        data: {
+                            username: 'cst',
+                            password: '123123'
+                        },
+                        success: function (res) {
+                            $(res.data).each(function (index, ele) {
+                                var $variable = $('.tpl').clone().removeClass().addClass('movieSection').appendTo('.wrapper');
+                                $variable.data({id:ele.id}).on('click',function(){
+                                    $.ajax({
+                                    url: 'https://easy-mock.com/mock/5c09f40d3c098813c612cce6/movie/movieInfo',
+                                    type: 'GET',
+                                    data: {
+                                        movieId: $(this).data('id')
+                                    },
+                                    success: function (res) {
+                                        console.log(res.data);
+                                        var data=res.data;
+                                        var dir=data.direct;
+                                        var gui=data.gut;
+                                        var actor=data.mainActor;
+                                        var name=data.name;
+                                        var writer=data.screenwriter;
+                                        var htmlStr='<p>'+dir+'</p>\
+                                                    <p>'+gui+'</p>\
+                                                    <p>'+actor+'</p>\
+                                                    <p>'+name+'</p>\
+                                                    <p>'+writer+'</p>';
+                                    $(htmlStr).appendTo($('.introduce'));
+                                    }
+                                    })
+                                })
+                                    .children().eq(0).attr('src',ele.poster)
+                                        .next().text(ele.name)
+                            })
+                        }
+                    })
+                }
+            }
+        })
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

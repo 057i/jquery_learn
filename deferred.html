@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+    // deferred对象就是jQuery的回调函数解决方案
+
+
+    // 状态位done对应对应调用reslove(),状态位fail对应调用reject()，状态位progress对应调用notify()
+    // var df=$.Deferred();//
+    // df.done(function(){  
+    //     console.log('i am succeed')
+    // });
+    // df.fail(function(){
+    //     console.log('i am fail')
+    // });
+    // df.progress(function(){
+    //     console.log('i am doing')
+    // });
+    // setInterval(function(){
+    //     var score=Math.random()*100;
+    //     if(score>60){
+    //         df.resolve();
+    //     }else if(score<50){
+    //         df.reject();
+    //     }else{
+    //         df.notify();
+    //     }
+    // },100)
+
+
+
+// deferred对象就是jQuery的回调函数解决方案(延迟对象)
+        var df=$.Deferred();
+        //注册成功的回调函数
+        df.done(function(ms){
+            console.log('i do it'+ms);
+        });
+        //注册失败的回调函数
+        df.fail(function(ms){
+            console.log('i am sorry'+ms);
+        });
+        //注册进行时的回调
+        df.progress(function(ms){
+            console.log('go on'+ms);
+        });
+        createScore();
+        function createScore(){
+            setInterval(function(){
+                var score=Math.random()*100;
+                if(score>60){
+                    df.resolve(' succeed');
+                }else if(score<50){
+                    df.reject(' loser');
+                }else{
+                    df.notify(' doing');
+                }
+            },100)
+            //返回的是阉割版的Deferrefd功能的对象，只返回有注册的三种状态的对象()，不能修改
+            return df.promise();//返回promise之后，用原本预设好的三种状态输出
+        }
+
+
+
+    </script>
+</body>
+</html>

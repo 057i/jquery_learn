@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        // var df=$.Deferred();
+        // df.then(function(){
+        //     console.log('succeed');
+        // },function(){
+        //     console.log('fail')
+        // },function(){
+        //     console.log('progress')
+        // })
+        // setInterval(function(){
+        //     var score=Math.random()*100;
+        //     if(score>60){
+        //         df.resolve();
+        //     }else if(score<50){
+        //         df.reject();
+        //     }else{
+        //         df.notify();
+        //     }
+        //     return df.promise();
+        // },100)
+    
+
+
+
+
+        // 链式调用then，将上一次then返回的对象作为下一次then执行的参数
+        // var df = getScore();
+        //     function getScore() {
+        //         var df = $.Deferred();
+        //         setInterval(function () {
+        //             var score = Math.random() * 100;
+        //             if (score > 60) {
+        //                 df.resolve(' !!!');
+        //             } else if (score < 50) {
+        //                 df.reject(' ???');
+        //             } else {
+        //                 df.notify(' what?');
+        //             }
+        //         }, 100)
+        //         return df.promise();//一定要主注意，返回一个Deferred对象供外边的df使用，不然本来df是一个函数的执行体就不能用Deferred上面的内容
+        //     }
+        //     df.then(function (ms) {
+        //         console.log('succeed' + ms);
+        //         return 'ok'      //then链式调用的return返回的是阉割版的Deferred对象，只有三种注册的才能用，返回到下一个return作为下一个return的返回状态
+        //     }, function (ms) {
+        //         console.log('fail' + ms)
+        //         return 'sorry'
+        //     }, function (ms) {
+        //         console.log('progress ' + ms)
+        //         return 'trying'
+        //     }).then(function (ms) {
+        //         console.log(ms)
+        //     }, function (ms) {
+        //         console.log(ms)
+        //     }, function (ms) {
+        //         console.log(ms)
+        //     })
+
+
+
+            //不用then的话可以这么写    
+            // df.done(function(ms){
+            //     console.log('succeed' + ms);
+            // })
+            // df.fail(function(ms){
+            //     console.log('fail' + ms);
+            // })
+            // df.progress(function(ms){
+            //     console.log('progress' + ms);
+            // })
+            
+
+
+
+        </script>
+    
+</body>
+</html>

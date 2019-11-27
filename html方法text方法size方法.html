@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </div>
+
+
+    <ul class="wrapper1">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <ul class="wrapper2">
+        <li>num=10-1</li>
+        <li>num=10-2</li>
+        <li>num=10-3</li>
+    </ul>
+
+
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+        var arrName=['姬成','陈思彤','老邓','吴彦祖','panda','小松'];
+       
+        //html的奇特之处就只函数只取第一个的值，下面这个不管执行几次不管有多少个，都只取第一个的值，但是如果用html赋值却不会这样
+            $('.wrapper li').html(function(index,ele){
+                var tar='<div class="demo">'+arrName[index]+'</div>'
+                return tar;  
+            })
+            console.log($('.wrapper li').html());  //返回<div class="demo">姬成</div>
+
+
+
+
+        //但是利用html方法取值，就不会出现不会循环只取一次的情况
+            console.log($('.wrapper1').html());
+            // 返回  <li>1</li>
+                    // <li>2</li>
+                    // <li>3</li>
+                    // <li>4</li>
+                    // <li>5</li>
+        
+
+        //利用text()方法，相当于js中的innerText方法
+        $('.wrapper1 li').text('3');//将.wrapper1下的li全部替换成3
+        
+        // $('.wrapper1').text('6');//这样做会把.wrapper1下的所有都覆盖掉，替换成文本6。不好
+
+
+        // .html和.text方法的强大之处在于括号里可以传处理函数(和js中的数组高级编程很类似)
+        $('.wrapper2 li').text(function(index,ele){
+            console.log(ele)//这里的ele是文本
+            return arrName[index]  //这里一定要是返回值,才会在文本中显示
+        })
+
+
+
+
+    
+    
+    </script>
+</body>
+</html>

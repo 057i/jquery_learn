@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper" style="width: 100px;height:100px; background: blue;position: absolute;"></div>
+    <div class="wrapper1" style="width: 100px;height:100px; background: yellow;position: absolute;"></div>
+
+    
+    <!-- <script src="./jquery.js"></script> -->
+    <script src="./my_jQuery.js"></script>
+    <!-- <script src="./myjQuery.js"></script> -->
+    <script type="text/javascript">
+
+        //queue的本质是数组(Array),
+        // 队列的三种方法  queue()创建队列    dequeue()出队列    clearQueue()清空队列
+
+
+        //用法
+        // $('.wrapper')
+        //     .queue('chain',function(){console.log('queue1')})    //这里的'chain'是队列的名字，这个执行函数'chain'这个数组里面；
+        //         .queue('chain',function(){console.log('queue2')})
+        //              .queue('chain',function(){console.log('queue3')})//链式调用定义队列3次
+
+        $('.wrapper')
+            .myQueue('chain',function(){console.log('queue1')})    //这里的'chain'是队列的名字，这个执行函数'chain'这个数组里面；
+                .myQueue('chain',function(){console.log('queue2')})
+                     .myQueue('chain',function(){console.log('queue3')})//链式调用定义队列3次
+
+
+
+
+        //出队列写法
+            // $('.wrapper')
+            //     .myDequeue('chain')
+            //         .myDequeue('chain')
+   
+
+
+
+        // console.log($('.wrapper').queue('chain'));//返回一个[ƒ]
+        // console.log($('.wrapper').queue('chain').length);返回1
+
+
+
+
+        // //全部出队写法
+        // $('.wrapper1')
+        //     .queue('chain',function(next){console.log('queue1');next();})   
+        //         .queue('chain',function(next){console.log('queue2');next();})   //这里的next是为了后面dequeue埋伏笔，一下子全部出队
+        //              .queue('chain',function(next){console.log('queue3');next();})
+        //                 .dequeue('chain')
+        //                 //返回
+        //                 //queue1
+        //                 //queue2
+        //                 //queue3
+
+
+
+
+                        
+
+        // //clearQueue清空队列
+        // $('.wrapper').clearQueue('chain');//清空队列操作
+        // console.log($('.wrapper').queue('chain').length)//这个时候打印它的length，为0
+
+        // // queuq配合animate进行队列动画效果
+        // $('.wrapper')
+        //     .on('click',function(){
+        //         $(this).dequeue('chain' )
+        // })                          //这里在定义队列时候顺便再括号里添加next，然后next()执行，在出队的时候只要执行一次，整个队列就都会执行完
+        //         .queue('chain',function(next){ $(this).animate({width:'+=50',height:'+=50',left:'+=50',top:'+=50'});next();}) 
+        //             .queue('chain',function(next){ $(this).animate({width:'+=50',height:'+=50',left:'+=50',top:'+=50'});next();})
+        //                 .queue('chain',function(next){ $(this).animate({width:'+=50',height:'+=50',left:'+=50',top:'+=50'})})
+
+
+
+        // $('.wrapper')
+        // .css({position: 'absolute', left: 0, top: 0, width: 100, height: 100, backgroundColor: 'red'})
+        // .on('click', function () {
+        //     $(this).dequeue('chain');
+        // }).queue('chain', function (next) {
+        //     $(this).animate({width: 120, height: 120, left: 100, top: 100});
+        //     next();
+        // }).queue('chain', function (next) {
+        //     $(this).animate({width: 220, height: 220, left: 200, top: 200});
+        //     next();
+        // }).queue('chain', function (next) {
+        //     $(this).animate({width: 320, height: 320, left: 300, top: 300});
+        // });
+
+    
+
+
+
+        
+    </script>
+</body>
+</html>

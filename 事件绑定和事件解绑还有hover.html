@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper" style="background: hotpink; width:100px; height:100px;"></div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <a href="https://www.baidu.com">百度一下，你就知道</a>
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        //on用来做事件绑定，括号里面可以填type,selector,date和handle,可以链式操作
+        $('.wrapper')
+            .on('click',clickAtt)
+                .on('mouseenter',mouseEnter)
+        function clickAtt(){
+            console.log("Don't click!")
+        }
+        function mouseEnter(){
+            console.log("mouseenter")
+        }
+        
+
+
+
+        //如果给同一个对象同一个事件绑定了多个处理函数，那么可以用off解绑该对象的特定事件的特定处理函数
+        //如：给.wrapper在绑定一个处理函数，然后把之前那个点击处理函数给解绑掉
+        $('.wrapper').on('click',clickAtt1);
+        function clickAtt1(){
+            console.log("clickAtt1")
+        }
+        // 然后解绑掉之前的
+        // $('.wrapper').off('click',clickAtt);//这样就不会显示之前的了
+
+
+
+
+
+
+
+
+        // //jq中利用事件委托然后再利用判断事件源对象的方式来筛选
+                    //写法一
+        // $('ul').on('click',function(e){   //这个是在父级绑定，然后底层自动循环绑定到底层
+        //     var event=e.target||window;
+        //     if(event.nodeName=='LI'){   //
+        //         console.log(event.innerText)
+        //     }
+        // })
+
+                    //写法二
+            $('ul').on('click','li',function(e){
+                console.log($(e.target).text())
+            })
+
+
+        //在on里面填数据的情况
+        $('ul').on('mouseenter','li',[10,20,30,40],function(e){  //同时存在selector和date，这里的date必须是数组，会作为e.date返回
+            console.log(e.target);   //这里的target是li
+            console.log(e.data);// 这里的data是[10,20,30,40]
+        })
+
+        //这里的事件到底是绑定在的ul还是绑在了li上面？是li
+        $('<li>9</li>').appendTo('ul');//它在绑定事件之后，插入一个新的li它还是有反应，所以结论是在ul上绑定通过事件委托实现
+
+
+
+
+
+
+
+
+        //还有一种绑定事件的方法是one，它的作用是只会执行一次,执行一次后不管再怎么触发事件，都不生效，用法和on一样
+        $('a').on('click',function(e){
+            window.open('https://www.taobao.com');
+            // e.preventDefault();//阻止默认事件，底层已经写好兼容性方法了，用法和js中一样，或者是return false
+        })
+
+
+
+
+        //off是用来解绑事件的，执行的是和on相反的操作
+        $('ul').find('li').eq(2).off();  //像这样的在父级绑定事件，然后想解绑掉父级中特定子集的事件是不行的，底层没有这个机制，除非解绑掉全部
+        // $('ul').off();解绑全部事件
+
+
+
+
+
+
+        //最后一个点就是trigger，用来触发自定义事件和系统事件,括号里不能不写参数，不写参数会报错不会自动循环执行事件
+        // $('.wrapper').trigger('click');//触发系统事件
+
+        // $('.wrapper').on('myClick',function(){
+        //     console.log('myClick')
+        // })
+        // $('.wrapper').trigger('myClick');
+
+
+
+        //特例,单独记(自定义事件)
+        $('.wrapper').on('myClick1',function(e,a,b,c,d){
+            console.log(e,a,b,c,d)
+        })
+        $('.wrapper').trigger('myClick1',[10,20,30,40])
+
+
+
+
+
+
+
+
+
+
+ 
+    
+    </script>
+
+
+
+
+
+
+
+    
+</body>
+</html>

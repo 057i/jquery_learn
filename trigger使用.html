@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper" style="background:greenyellow;width: 100px;height: 100px;"></div>
+
+
+
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+
+// jq中事件分为系统事件和自定义事件，on用来对所有事件进行操作，
+// 而trigger可以用来出发系统事件和自定义事件，其中系统事件包括click,mouseover,mouseenter等
+  
+//on可以用链式调用，一下子可以绑定很多个事件
+    // $('.wrapper')
+    //     .on('click',function(e){   //不单单是js中有事件，jq中也有事件
+    //     console.log(e.target)//这里的系统事件源是原生的dom对象
+    //     $(this).css({background:'red'})})
+    //     .on('mouseover',function(){
+    //         console.log('mouseover')
+    //     })
+
+
+
+
+
+
+
+
+    //trigger是利用代码层面主动触发，想要触发jq对象的哪一个事件trigger()括号里就写什么
+    // $('.wrapper').trigger('click')
+
+
+    //trigger括号里还可以填第二个参数，第二个参数必须为数组，作为事件执行的参数，例如
+    // $('.wrapper').on('click',function(e,a,b,c,d,f,g){
+    //     console.log(e,a,b,c,d,f,g);
+    //     // jQuery.Event {type: "click", timeStamp: 1553588835390, jQuery214041569939789644317: true, isTrigger: 3, namespace: "", …} 
+    //     // 1 2 3 4 5 6
+    // })    
+    // $('.wrapper').trigger('click',[1,2,3,4,5,6])//第二个参数当做是事件执行参数传递
+
+
+
+
+
+
+//用on绑定自定义事件，然后用trigger,自定义事件考验一个人的功底
+    $('.wrapper').on('pageLoad',function(){
+        console.log('pageLoad')
+    })
+    $('.wrapper').trigger('pageLoad');//主动触发，直接输出pageLoad-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="./" method='GET'>
+        <h3>选择你喜欢的明星</h3>
+        <select name="star" id="">
+            <option value="s">詹姆斯</option>
+            <option value="a">库里</option>
+            <option value="b">奥拉迪波</option>
+        </select>
+        <h3>一句话简单介绍你喜欢的明星</h3>
+        <label for="one">三分准</label>
+        <input type="checkbox" name="special" value="three" id="one">
+        <label for="two">组织好</label>
+        <input type="checkbox" name='special' value="org" id="two">
+        <label for="three">突破强</label>
+        <input type="checkbox" name="special" value="strong" id="three">
+        
+        <h3>具体描述该明星技术特点</h3>
+        <textarea name="des" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="login">
+    </form>
+    <div></div>
+    
+</body>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+    //val只能用来获取和赋予表单元素的值，什么又叫表单元素？就是可以让用户自己去填写选择的那些元素，那些框。val()就是用来做这个用,像获取p,div那些标签的值可以赋值，但是不显示，取得时候又取得到
+    //要注意的是，表单元素有很多，如果想取出全部值是不可以的，只会取出第一个值,操作的是里面的value这个特性
+    //但是如果用val来赋值的话，就会操作选出来的全部表单元素
+
+    
+    console.log($('option').eq(0).val());//返回s,获取表单元素option第一个的值
+    console.log($('option').val());//返回s,获取表单元素option的第一个的值，不会获取到全部
+
+    console.log($('input').eq(0).val());//返回three,获取表单元素input第一个的值
+    console.log($('input').val());//返回three,获取表单元素input的第一个的值，不会获取到全部
+
+    console.log($('textarea').val());//获取表单元素textarea第一个的值,因为没有写，所以没值
+
+    console.log($('form').val());//获取不到！！！
+
+    $('input').val('aaa');//会对选到的所有的input进行操作，赋值aaa,这里有个弊端，就是连提交按钮的值也改成aaa了
+    console.log($('input').val());//返回aaa
+
+
+
+    //注意！！！如果真的想返回这个表单的值，不能用$('form').val(),要是用serialize()或者serializeArray()
+    console.log($('form').serialize());//返回"star=s&special=aaa&special=aaa&special=aaa&des=dsada"，返回的是表单对象和表单值拼接成的字符串
+    console.log($('form').serializeArray())
+    //返回(5) [{…}, {…}, {…}, {…}, {…}]
+            // 0: {name: "star", value: "s"}
+            // 1: {name: "special", value: "aaa"}
+            // 2: {name: "special", value: "aaa"}
+            // 3: {name: "special", value: "aaa"}
+            // 4: {name: "des", value: "dsada"}
+            // length: 5
+            // __proto__: Array(0)
+
+
+        //val有一种奇葩的赋值方式，索引值和老数据相互操作，基本不用,作为拓展
+        $('input[type="checkbox"]').val(function(index,oldValue){
+            return index+oldValue
+        })
+        
+        $('div').val('qqqqq');
+        console.log($('div').prop('value'))
+        console.log($('div').attr('value'))
+
+    
+
+
+    //$('input[type="checkbox"]').eq(0).prop('checked')  单选框，判断是否选了，如果勾选了，就是true，没勾选，就是false
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .tpl{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tpl">
+        <div></div>
+        <span></span>
+        <button>add</button>
+    </div>
+
+
+</body>
+<script src="./jquery.js"></script>
+<script type="text/javascript">
+    var shopArr = [
+        {
+            name: 'james solider',
+            shopName: 'nike',
+            price: 110,
+            id: '1001'
+        }, {
+            name: 'Rose crazyLight',
+            shopName: 'adidas',
+            price: 90,
+            id: '2002'
+        }, {
+            name: 'curry one',
+            shopName: 'Under Armour',
+            price: 120,
+            id: '3003'
+        }
+    ];
+    shopArr.forEach(function(ele,index,self){
+        var oCloneDom=$('.tpl').clone().removeClass('tpl');
+        oCloneDom.data({
+            id:ele.id,
+            shopName:ele.name,
+            price:ele.price
+        }).find('div')
+            .text(ele.name)
+                .next()
+                    .text(ele.price);
+        oCloneDom.appendTo($('body'))
+        console.log(oCloneDom)
+
+
+    })
+
+
+    // data用来保存某个临时数据的值，网页刷新后失效
+
+
+
+
+
+
+
+</script>
+
+</html>

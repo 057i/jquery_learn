@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul class="box">
+            <li data='cstDuyi'>1</li>
+            <li data='Duyi'>2</li>
+            <li id='san'>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+        </ul>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+
+
+
+    <div class="wrapper1">
+        <div class="demo">
+            <span>span1</span>
+        </div>
+        <div class="demo">
+            <p>p1</p>
+        </div>
+        <div class="demo">
+            <span>span2</span>
+        </div>
+    </div>
+
+    <div class="wrapper3">
+        <ul class="oobox">
+            <li id="ooo">1</li>
+            <li id="ooo1">2</li>
+            <li id="ooo2">3</li>
+            <li id="ooo3">4</li>
+            <li id="ooo4">5</li>
+        </ul>
+    </div>
+
+
+
+    <!-- 官方jq库 -->
+    <!-- <script src="./jquery.js"></script>   -->
+
+    <!-- 自己封装的jq库 -->
+    <script src="./my_jQuery.js"></script>  
+
+    <!-- <script src="./myjQuery.js"></script> -->
+    
+    <script type="text/javascript">
+        //jQuery的css选择器和直接在style里面写样式一模一样
+
+
+        //$('')   dollar选择器，按照样式选出相对应的dom元素后，将这个元素封装成一个jQuery对象，然后返回这个对象，这个对象可以使用jQuery上的方法
+        //这个对象由jQuery.fn.init()构造出来
+        //css选择器用法一 
+        // $("div").css({width:100,height:100,background:'red',margin:15});
+        // console.log($("div"));
+
+
+        //css选择器用法二，选择全部子类
+        // $('.wrapper ul li').css({width:100,height:100,background:'red',margin:15});
+
+
+        //css选择器用法三，选择指定子元素或者伪类
+        // 1. :eq(),用来选择子元素子元素,注意这里的下标从0开始，-1是最后一个
+        //因为jQuery有容错机制，所以超出下标不显示
+        // $('.wrapper ul li:eq(9)').css({width:100,height:100,background:'red',margin:15});
+
+        //按照属性选择是[]
+        // $('li[data="Duyi"]').css({width:100,height:100,background:'blue',margin:15});
+
+        //属性名以cst打头的
+        // $('li[data^="cst"]').css({width:100,height:100,background:'blue',margin:15});
+
+        //属性名以apper结尾的
+        // $('[class$="pper"]').css({border:"1px solid black"});
+
+        //筛选出属性名不等于cst的
+        // console.log($('[class!="wrapper"]'))
+
+
+
+
+        //jQuery选择器容错机制之二，是可以选择null undefined ''不报错
+        // $(null).css({width:100,height:100,background:'red',margin:15});
+
+
+        // jQuery选择器方法的each方法，find方法，css方法叠加
+        // var colorArr=['red','blue','yellow'];
+        // $('.wrapper1 .demo').each(function(index,ele){ //先用子类选择选出大类
+        //     $(ele)          //再用each方法遍历全部
+        //         .find('span')     //遍历同时寻找span元素
+        //         .css({color:colorArr[index]})   //赋予样式
+        //         console.log(ele)
+        // })
+
+
+        // // jQuery可以封装原生Js获取到的dom，然后使用jQuery上的对象方法
+        // var oDiv=document.getElementsByClassName('demo');
+        // // oDiv.css({color:'red'}) 不能这么用，因为原生js获取dom后不会将这个dom封装成一个对象
+        // $(oDiv).css({color:'green'})
+
+
+
+
+
+        //jQuery上的get()方法，括号里可以写下标值,下标从0开始，返回的是原生dom对象，可以使用原生Js上的dom方法
+        console.log($('.demo').get());//返回 [div.demo, div.demo, div.demo]，一个包含全部demo的dom对象的数组    
+        console.log($('.demo').get(1));//返回第二个demo类名的原生dom
+        console.log($('.demo').get(-1));//-1返回的是最后一个位置的原生dom对象
+        // $('.demo').get(0).css({color:'green'})   错误写法！！！原生dom对象不能使用jQuery包装的对象上的方法
+        
+        //由此，可以封装简易功能版的get()方法，见js文件
+
+
+        //eq()方法返回的带有被选元素的指定索引号的元素,通俗点就是选出一组元素然后按照索引号返回一个jq元素，
+        //不会往子集去找，只会同级找，如果是find会往下一层去寻找,示例$(selector).ed(0)
+        $('.demo').eq(-2).css({color:'blue'});//将倒数第二个demo类名的样式设置为蓝色
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //jQuery上find()方法，以调用的对象为基础，向下找
+            // $('wrapper').find('#san').css({width:'100px',height:'100px',color:'red',margin:'15px'})
+
+
+        //     Array.prototype.filter2=function(func){
+        //     var _arr=this,len=this.length,_arg=[],parme2=arguments[1]||window;
+        //     for(var i=0;i<len;i++){
+        //         func.apply(parme2,[_arr[i],i,self])?_arg.push(_arr[i]):''
+        //     }
+        //     return _arg
+        // }
+
+        //     var arr1=[1,2,3,4,5,6,7];
+        //     var arr2=arr1.filter2(function(ele,index,self){
+        //         // console.log(ele>2)
+        //         return ele>2
+        //     })
+
+
+        
+
+
+            //jQuery上的filter方法
+                //jquery css selector 
+            // $('.wrapper3 ul').find('li').css({color:'green'});//取出.wrapper ul,然后在此基础上找li
+            // $('.wrapper3 ul').find('li').filter(':last-child').css({color:'red'})//在找到li的基础上筛选出li上的最后一个
+            
+            // //filter最强的功能是括号里面还可以传函数，形如.filter(function(index,ele){.....})   index为下标，ele为原生dom对象，不可以使用jquery对象方法
+            // $('.wrapper3 ul').find('li').filter(function(index,ele){
+                
+            //     // console.log(index,ele)
+            //     // return true  留下来
+            //     // return false 拿出去
+            // })
+
+
+            
+            //
+        
+
+
+
+
+
+        
+
+
+
+        // $('.wrapper').css({ backgroundColor: 'blue' })
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

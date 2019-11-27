@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="demo">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+        </div>
+        <div class="demo">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+        </div>
+        <div class="demo">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+        </div>
+    </div>
+
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        //wrap:在外面嵌套一层父级；
+       // wrapInner:给当前元素里面嵌套一个小的父级嵌套住里面包含的元素；
+      // wrapAll:给选出的一系列元素的集合添加一个共同的父级；
+    //   unWrap：用一次取消掉一层父级
+
+
+    //在wrapper外面再添加一个父级doubleWrapper，因为wrapper只有一个，不用循环
+    //    $('.wrapper').wrap('<div class="doubleWrapper"></div>');
+
+        //wrap里面还可以添加函数，记得要有return 返回
+        // $('.demo').wrap(function(index,ele){
+        //     return '<div class=box'+index+'></div>'
+        // })
+
+
+
+    //    $('.demo').wrap('<div class="box"></div>');//因为demo有多个，在jq内部就会进行自动的循环，然后在每个demo外面添加一个父级box
+        //如果只想给这多个demo嵌套一个大的父级的话，用wrapAll()
+        // $('.demo').wrapAll('<div class="box"></div>');
+
+
+        //用unWrap取消掉当前元素的父级,最多只能删除到body为止不能再删了
+        $('.demo').unwrap();
+
+    
+    
+
+
+
+    
+    
+    
+    </script>
+</body>
+</html>

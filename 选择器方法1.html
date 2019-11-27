@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <div class="wrapper">
+       <ul class="ul">
+           <li id="op">1</li>
+           <li>2</li>
+           <li>3</li>
+           <li>4</li>
+       </ul>
+   </div>
+   <ul>
+    <li>8</li>
+    <li>8</li>
+    <li>1</li>
+    </ul>
+
+    <input type="checkbox" id='checkbox' checked="false">
+
+
+    <script src="jquery.js"></script>
+    <!-- <script src="./my_jQuery.js"></script> -->
+    <script type="text/javascript">
+      
+       //集中操作方法add(),笔面试重点，集中操作方法是把.wrapper类名下的ul选出来，然后再将页面中的ul也全部选出来，
+       //归为一组，然后对这个组进行集中操作
+       
+       //将所有的ul赋值属性字体颜色为红色
+       $('.wrapper')
+            .add('.ul')
+            .css({color:'red'})
+
+         
+        //jQuery上attr方法和prop方法。    
+        //赋值
+        $('#checkbox').attr('data-log','duyi');
+        console.log($('#checkbox').attr('data-log'))//返回duyi
+        console.log($('#checkbox').prop('data-log'))//返回undefined,因为prop只能获取特性值，比如class,id checked
+      
+        //重点！！！
+        $('#checkbox').prop('log','duyi');//虽然可以赋值，但是如果赋的是非特性的值，则行间样式找不到，找不到的同时要是获取是可以获取的到的
+        console.log($('#checkbox').prop('log'));//返回duyi,但是行间样式找不到
+
+
+        console.log($('#checkbox').attr('checked'))//checked
+        console.log($('#checkbox').prop('checked'))//true
+
+    
+        //prop是通过js原生dom上的对象方法动态的获取特性值的，只显示有影射关系的特性
+        
+    
+    
+    
+    
+    </script>
+    
+     
+    
+    
+    </script>
+    
+</body>
+</html>

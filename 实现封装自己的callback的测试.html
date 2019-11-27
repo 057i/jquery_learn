@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./my_jQuery.js"></script>
+    <script type="text/javascript">
+    function a(ms){
+        console.log('a'+ms);
+    }
+    function b(ms){
+        console.log('b'+ms);
+    }
+    function c(ms){
+        console.log('c'+ms)
+    }
+    // callbacks里面不传值的情况
+    // var cb=$.myCallBacks();
+    // cb.add(a);
+    // cb.add(b);
+
+
+    //callbacks里面传once的情况，不管fire几次，只会fire一次
+    // var cb=$.myCallBacks('once');
+    // cb.add(a);
+    // cb.add(b);
+    // cb.fire('once');
+    // cb.fire('once');
+
+
+    //callbacks里面传once+momory的情况,多次fire只执行一次，且是会保留参数的fire
+    var cb=$.myCallBacks('oncememory');
+    cb.add(a);
+    cb.add(b);
+
+
+
+
+    cb.fire(' memory');
+    cb.add(c);
+    cb.fire(' memory');
+
+    cb.fire('once')
+
+
+
+    
+    
+    
+    
+    
+    </script>
+
+
+
+    
+</body>
+</html>

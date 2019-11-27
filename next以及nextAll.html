@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        全选：<input type="checkbox">
+        banana: <input type="checkbox">
+        apple: <input type="checkbox">
+        orange: <input type="checkbox">
+        <input type="submit" value="login">
+
+    </div>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+
+    //next的用法，只选取下一个兄弟节点
+        // $('input').eq(0).click(function(){
+        //     if($(this).prop('checked')){
+        //         $(this).next().prop('checked',true)//这里注意一下，checkbox是单选框的类型关键字，如果是想看是否被选中，用prop()查看里面的checked是true还是false就好
+        //     }else{
+        //         $(this).next().prop('checked',false)
+        //     }
+        // })
+
+
+    // nextAll的用法，选取该节点之后的所有同级兄弟节点，可以加限定条件
+        $('input[type="checkbox"]').eq(0).click(function(){
+            if($(this).prop('checked')){
+                $(this).nextAll().prop('checked',true)
+            }else{
+                $(this).nextAll().prop('checked',false)
+            }
+        })
+
+
+        //prev的用法和next的用法一模一样，只是next是选取同级的后面的兄弟元素节点，prev是选取同级前面的兄弟元素节点
+        $('input[type="checkbox"]').eq(3).click(function(){
+            if($(this).prop('checked')){
+                $(this).prev().prop('checked',true)
+            }else{
+                $(this).prev().prop('checked',false)
+            }
+        })
+
+        //因为这个按钮的类型是type,所以它没有checked属性，就算这样写他也不会生效
+        $('input').eq(4).click(function(){
+            if($(this).prop('checked')){
+                $(this).prevAll().prop('checked',true)
+            }else{
+                $(this).prevAll().prop('checked',false)
+            }
+        })
+
+
+    </script>
+</body>
+</html>

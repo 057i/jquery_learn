@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./my_jQuery.js"></script>
+    <script type="text/javascript">
+        var df=$.myDeferred();
+        //注册成功的回调函数
+        df.done(function(ms){
+            console.log('i do it'+ms);
+        });
+        //注册失败的回调函数
+        df.fail(function(ms){
+            console.log('i am sorry'+ms);
+        });
+        //注册进行时的回调
+        df.progress(function(ms){
+            console.log('go on'+ms);
+        });
+        createScore();
+        function createScore(){
+            setInterval(function(){
+                var score=Math.random()*100;
+                if(score>90){
+                    df.resolve(' succeed');
+                }else if(score<30){
+                    df.reject(' loser');
+                }else{
+                    df.notify(' doing');
+                }
+            },100)
+            //返回的是阉割版的Deferrefd功能的对象，只返回有注册的三种状态的对象()，不能修改
+            // return df.promise();
+        }
+    
+    
+    
+    </script>
+</body>
+</html>

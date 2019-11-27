@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+    // var df1=$.Deferred();
+    // df1.resolve();
+    // console.log(df1.state())//resolved
+    
+    
+    // var df2=$.Deferred();
+    // df2.reject();//rejected
+    // console.log(df2.state())
+    
+    // var df3=$.Deferred();
+    // df1.progress();
+    // console.log(df3.state())//pending
+    
+    // var df4=$.Deferred();
+    // df4.promise();
+    // console.log(df4)//一个jq版的promise对象
+    
+
+
+    var df=$.Deferred();
+    
+    function randomNum(){
+        var  num=Math.random()*10
+        if(num<4){
+            df.resolve('aaa');
+        }else if(num>8){
+            df.reject('bbbb');
+        }else{
+            df.progress('aaaaa')
+        }
+        return df.promise();//防止作用域内的Deferred对象可以被手动的篡改
+    }
+    // df.done(function(parme){
+    //     console.log('success'+parme)
+    // });
+    // df.fail(function(parme){
+    //     console.log('lose'+parme)
+    // })
+    // df.notify(function(){
+    //     console.log(111111)
+    // })
+    randomNum()
+        .then(function(ms){console.log('succeed'+ms)},
+                function(ms){console.log('fail'+ms)})
+                //jq版的then里面和es6的promise一样，写两个参数，成功回调和失败回调
+
+
+
+
+    
+    </script>
+</body>
+</html>

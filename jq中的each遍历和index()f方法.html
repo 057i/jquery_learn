@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+        <span></span>
+        <i></i>
+    </div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+
+
+
+<script src="./jquery.js"></script>
+<script type="text/javascript">
+    // 要求：1。用each方法给span和i里面填上他们的索引，并且加上classname
+    $('.wrapper').eq(0).children().each(function(index,ele){    //each方法里面的ele是原生的dom对象
+        $(ele).text(index).addClass(this.nodeName.toLowerCase()+$(ele).index())
+    })
+
+    // index()方法返回的是该元素在父级下的是第几个
+    console.log($('.wrapper').eq(2).index())
+    //children()方法返回的是该元素下的子集
+    console.log($('.wrapper').eq(0).children('i'))
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
